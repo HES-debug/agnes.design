@@ -86,3 +86,36 @@
     document.documentElement.addEventListener('mouseleave',function(){c.classList.remove('on')});
     document.addEventListener('mouseover',function(e){if(!e.relatedTarget)c.classList.add('on')});
   })();
+
+  // Case studies: build a sticky list of quick links from each chapter's eyebrow (plus the key decisions),
+  // and highlight the section in view. Buttons scroll instead of changing the URL hash, so the :target view stays put.
+  (function(){
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.querySelectorAll('article.view').forEach(function(view){
+      var chapters=view.querySelectorAll('.flow > .chapter');
+      if(chapters.length<3)return;
+      var nav=document.createElement('nav');nav.className='cs-toc';nav.setAttribute('aria-label','On this page');
+      var ol=document.createElement('ol'),items=[];
+      function add(target,label,sub){
+        var li=document.createElement('li');if(sub)li.className='sub';
+        var b=document.createElement('button');b.type='button';b.textContent=label;
+        b.addEventListener('click',function(){target.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'})});
+        li.appendChild(b);ol.appendChild(li);items.push({el:target,btn:b});
+      }
+      chapters.forEach(function(ch){
+        var eb=ch.querySelector('.eyebrow');if(!eb)return;
+        add(ch,eb.textContent.trim(),false);
+        if(/decision/i.test(eb.textContent))ch.querySelectorAll('h3').forEach(function(h){
+          var t=h.textContent.trim();add(h,t.split(/[,:]| instead| so /)[0],true);
+        });
+      });
+      nav.appendChild(ol);view.appendChild(nav);
+      function spy(){
+        var y=innerHeight*0.35,cur=items[0];
+        items.forEach(function(it){if(it.el.getBoundingClientRect().top<=y)cur=it});
+        items.forEach(function(it){it.btn.classList.toggle('on',it===cur)});
+      }
+      addEventListener('scroll',function(){if(view.matches(':target'))spy()},{passive:true});
+      addEventListener('hashchange',spy);spy();
+    });
+  })();

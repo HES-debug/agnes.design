@@ -1092,3 +1092,23 @@ html,body{margin:0}
   .ab-d-sel + .ab-d-name{margin-top:32px}
   @media (prefers-reduced-motion:reduce){.ab-d-sel *,.ab-d-sel::before{transition:none}}
   :is(#books,#museums) .cs-top{padding-block:clamp(16px,3vw,32px) 0}
+  /* Case studies: sticky "on this page" links on the left (inspo: rachelchen.tech). Built by script.js, wide screens only */
+  .cs-toc{display:none}
+  @media (min-width:1180px){
+    .cs-toc{display:block;position:fixed;left:clamp(24px,3vw,48px);top:50%;transform:translateY(-50%);z-index:20;width:200px;font-family:Inter,system-ui,sans-serif}
+    .cs-toc ol{list-style:none;margin:0;padding:0}
+    .cs-toc li{margin:0}
+    .cs-toc button{display:block;position:relative;width:100%;text-align:left;border:0;background:none;padding:6px 0 6px 18px;font:400 .95rem/1.3 Inter,system-ui,sans-serif;color:#A5A5A0;cursor:pointer;transition:color .2s}
+    .cs-toc .sub button{padding-left:34px;font-size:.88rem}
+    .cs-toc button:hover{color:#2A2A28}
+    .cs-toc button.on{color:#E65F2E}
+    .cs-toc button.on::before{content:"";position:absolute;left:2px;top:50%;width:6px;height:6px;margin-top:-3px;background:#E65F2E}
+    .cs-toc .sub button.on::before{left:18px}
+    .cs-toc button:focus-visible{outline:2px solid #E65F2E;outline-offset:2px}
+  }
+  .flow .chapter,.flow .chapter h3{scroll-margin-top:96px}
+  @media (min-width:1180px){ article.view:has(> .cs-toc){padding-left:clamp(230px,18vw,260px)} }
+  /* Case studies: one column. Header, hero, text and every image share the paragraph width (inspo: rachelchen.tech) */
+  article.view:has(.flow) .cs-top .wrap,article.view:has(.flow) > .wrap{max-width:calc(760px + 2*var(--gut))}
+  .flow .shot.wide,.flow .ba{width:100%;margin-left:0;transform:none}
+  .flow .ba{margin-top:28px}
