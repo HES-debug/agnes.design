@@ -1091,3 +1091,4 @@ html,body{margin:0}
   .ab-d-sel:hover::before,.ab-d-sel:hover .sel-h,.ab-d-sel:hover .sel-tag,.ab-d-sel:hover .sel-size{opacity:1}
   .ab-d-sel + .ab-d-name{margin-top:32px}
   @media (prefers-reduced-motion:reduce){.ab-d-sel *,.ab-d-sel::before{transition:none}}
+  :is(#books,#museums) .cs-top{padding-block:clamp(16px,3vw,32px) 0}
