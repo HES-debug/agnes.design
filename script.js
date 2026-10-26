@@ -72,14 +72,14 @@
     var c=document.createElement('div');c.className='cur';c.setAttribute('aria-hidden','true');c.innerHTML='<i></i><span></span>';
     document.body.appendChild(c);document.documentElement.classList.add('has-cur');
     var label=c.querySelector('span'),x=-100,y=-100,raf=0;
-    var VIEW='#projects .card,.wl-row,.bp-card,.next a';
+    var VIEW='#projects .card,.wl-row,.bp-card,.bt-tile,.next a';
     function place(){raf=0;var t=c.classList.contains('is-text')?'translate(-1.5px,-10px)':(c.classList.contains('is-link')?'translate(-6px,-6px)':'translate(-4px,-4px)');c.style.transform='translate('+x+'px,'+y+'px) '+t}
     document.addEventListener('pointermove',function(e){
       if(e.pointerType!=='mouse')return;x=e.clientX;y=e.clientY;c.classList.add('on');
       var el=e.target,v=el.closest&&el.closest(VIEW),l=!v&&el.closest&&el.closest('a,button,summary,label,[tabindex]');
       var txt=!v&&!l&&el.closest&&el.closest('p,h1,h2,h3,h4,li,blockquote,dd,dt,figcaption,small');
       c.classList.toggle('is-view',!!v);c.classList.toggle('is-link',!!l);c.classList.toggle('is-text',!!txt);
-      if(v)label.textContent=v.classList.contains('bp-card')?'See the work':'View project';
+      if(v)label.textContent=(v.classList.contains('bp-card')||v.classList.contains('bt-tile'))?'See the work':'View project';
       if(!raf)raf=requestAnimationFrame(place)},{passive:true});
     document.addEventListener('pointerdown',function(){c.classList.add('is-down')});
     document.addEventListener('pointerup',function(){c.classList.remove('is-down')});

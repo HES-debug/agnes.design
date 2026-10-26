@@ -1026,3 +1026,68 @@ html,body{margin:0}
   .cur.is-link i{width:12px;height:12px}
   .cur.is-view span{display:block}
   .cur.is-down i{width:6px;height:6px}
+
+  /* Beyond tech: filter tabs (inspo: rachelchen.tech Fun page). CSS only, radio inputs + :has */
+  .bt > input{position:absolute;opacity:0;pointer-events:none}
+  .bt-tabs{display:flex;flex-wrap:wrap;gap:6px 10px;margin:0 0 clamp(24px,4vw,40px);font-family:Inter,system-ui,sans-serif}
+  .bt-tabs label{font-size:clamp(1rem,1.6vw,1.25rem);color:#8A8A86;padding:6px 12px;cursor:pointer;transition:color .2s,background .2s}
+  .bt-tabs label:hover{color:#2A2A28}
+  .bt:has(#bt-all:checked) label[for="bt-all"],.bt:has(#bt-brand:checked) label[for="bt-brand"],.bt:has(#bt-fashion:checked) label[for="bt-fashion"]{background:#E65F2E;color:#fff}
+  .bt:has(input:focus-visible) .bt-tabs{outline:2px solid #E65F2E;outline-offset:4px;border-radius:4px}
+  .bt-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,4vw,44px) clamp(16px,3vw,32px)}
+  .bt-tile{display:block;color:inherit;text-decoration:none;animation:btin .35s ease both}
+  .bt-ph{aspect-ratio:16/11;overflow:hidden;background:#e4e4e1}
+  .bt-ph img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+  .bt-tile:hover .bt-ph img{transform:scale(1.03)}
+  .bt-tile h3{margin:14px 0 2px;font:400 clamp(1.1rem,1.8vw,1.4rem)/1.25 Inter,system-ui,sans-serif;color:#2A2A28;letter-spacing:-.01em}
+  .bt-tile p{margin:0;font:400 .9rem/1.4 Inter,system-ui,sans-serif;color:#8A8A86}
+  .bt:has(#bt-brand:checked) .bt-tile:not([data-cat="brand"]),.bt:has(#bt-fashion:checked) .bt-tile:not([data-cat="fashion"]){display:none}
+  @keyframes btin{from{opacity:0;transform:translateY(8px)}}
+  @media (max-width:760px){.bt-grid{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:reduce){.bt-tile{animation:none}.bt-ph img{transition:none}}
+
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+  /* 2026-10-26: no back links or white banners; page headers sit on the page */
+  .cs-top{background:none;border-radius:0}
+  #beyond .cs-top{padding-block:clamp(16px,3vw,32px) 0}
+  /* Grain texture over the whole page (inspo: rachelchen.tech) */
+  body::after{content:"";position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.07;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  /* Beyond tech: uneven columns, tighter tabs */
+  .bt-tabs{gap:4px 22px;margin-bottom:clamp(20px,3vw,32px)}
+  .bt-tabs label{padding:1px 6px;font-size:clamp(1rem,1.5vw,1.15rem)}
+  .bt-grid{display:block;columns:4 220px;column-gap:clamp(16px,2vw,24px)}
+  .bt-tile{break-inside:avoid;margin-bottom:clamp(24px,3vw,36px)}
+  .bt-ph{aspect-ratio:auto}
+  .bt-tile h3{margin-top:12px;font-size:clamp(1.05rem,1.4vw,1.3rem)}
+  .bt-tile p{font-size:clamp(1rem,1.3vw,1.2rem);color:#A5A5A0;line-height:1.35}
+  .bt-tile:hover h3{color:#E65F2E}
+  @media (max-width:760px){.bt-grid{columns:2;column-gap:12px}.bt-tile p{font-size:.9rem}}
+  /* 2026-10-26: one background everywhere (white, like the home page); cards in case studies get a soft grey so they still read */
+  body{background:#fff}
+  .nav-c{background:rgba(255,255,255,.94)}
+  :is(.flow .tldr div,.flow .findings div,.flow .ba-before,.flow .ba-after .steps li,.flow .tool,.flow .branch div,.flow .tradeoff,.flow .claims .cant,.flow .testimonial,.pull,.stat,.facts,.tl,.flow .toplists > div,.bp-time li){background:#F5F5F3}
+  .tag,.flow .steps li{background:#EDEDEA}
+  /* About: compact profile (inspo: Darina Usanova) */
+  .ab-d{max-width:680px;padding-block:clamp(40px,7vw,88px);font-family:Inter,system-ui,sans-serif}
+  .ab-d-photo{display:block;width:96px;height:96px;border-radius:14px;object-fit:cover;object-position:62% 30%}
+  .ab-d-name{margin:20px 0 0;font-size:1.35rem;font-weight:500;color:#111;line-height:1.3}
+  .ab-d-role{margin:2px 0 0;font-size:1.1rem;color:#8A8A86}
+  .ab-d-body{margin-top:28px}
+  .ab-d-body p{margin:0 0 18px;font-size:1.06rem;line-height:1.65;color:#2A2A28}
+  .ab-d-links{margin:28px 0 0;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;color:#8A8A86;font-size:1rem}
+  .ab-d-links a{color:#8A8A86;text-decoration:none;transition:color .2s}
+  .ab-d-links a:hover{color:#E65F2E}
+  .ab-d-photo{object-position:center}
+  #work .cs-top{padding-block:clamp(16px,3vw,32px) 0}
+  /* About photo: Figma-style selection frame on hover, in the site orange */
+  .ab-d-sel{position:relative;display:inline-block;padding:7px;margin:-7px}
+  .ab-d-sel::before{content:"";position:absolute;inset:0;border:1.5px solid #E65F2E;opacity:0;transition:opacity .2s}
+  .ab-d-sel .sel-h{position:absolute;width:9px;height:9px;background:#fff;border:1.5px solid #E65F2E;opacity:0;transition:opacity .2s}
+  .ab-d-sel .sel-tl{left:-4px;top:-4px}.ab-d-sel .sel-tr{right:-4px;top:-4px}.ab-d-sel .sel-bl{left:-4px;bottom:-4px}.ab-d-sel .sel-br{right:-4px;bottom:-4px}
+  .ab-d-sel .sel-tag{position:absolute;left:2px;bottom:calc(100% + 5px);font:500 .8rem/1 Inter,system-ui,sans-serif;color:#E65F2E;opacity:0;transition:opacity .2s}
+  .ab-d-sel .sel-size{position:absolute;left:50%;top:calc(100% + 7px);transform:translateX(-50%);background:#E65F2E;color:#fff;font:500 .75rem/1 Inter,system-ui,sans-serif;padding:4px 7px;border-radius:5px;white-space:nowrap;opacity:0;transition:opacity .2s;z-index:1}
+  .ab-d-sel:hover::before,.ab-d-sel:hover .sel-h,.ab-d-sel:hover .sel-tag,.ab-d-sel:hover .sel-size{opacity:1}
+  .ab-d-sel + .ab-d-name{margin-top:32px}
+  @media (prefers-reduced-motion:reduce){.ab-d-sel *,.ab-d-sel::before{transition:none}}
